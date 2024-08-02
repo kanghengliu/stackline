@@ -155,6 +155,8 @@ hs -c "stackline.config:toggle('appearance.showIcons')"
 
 - Launch `yabai` (or make sure it's running) (`brew services start yabai`)
 - Launch `hammerspoon` (or make sure it's running) (`open -a "Hammerspoon"`)
+- [!] Add yabai event listener to `yabairc` file (`
+yabai -m signal --add event=space_changed action="hs -A -c 'stackline.manager:update({forceRedraw = true})'"`)
 
 **Create a window stack**
 
