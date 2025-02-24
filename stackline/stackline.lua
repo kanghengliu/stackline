@@ -144,16 +144,18 @@ function stackline:setLogLevel(lvl) -- {{{
 	log.i(("Window.log level set to %s"):format(lvl))
 end -- }}}
 
--- stackline.spaceWatcher = hs.spaces.watcher.new( -- {{{
---     function(spaceIdx)
---         -- QUESTION: do I need to clean this up? If so, how?
---         -- Update stackline when switching spaces
---         -- NOTE: hs.spaces.watcher uses deprecated macos APIs, so this may break in an upcoming macos release
---         log.i(('hs.spaces.watcher -> changed to space %d'):format(spaceIdx))
---         stackline.forceRedraw = true -- force the next update cycle to redraw
---         stackline.queryWindowState:start()
---         stackline:refreshClickTracker()
---     end
--- ):start() -- }}}
+stackline.spaceWatcher = hs.spaces.watcher
+	.new( -- {{{
+		function(spaceIdx)
+			-- QUESTION: do I need to clean this up? If so, how?
+			-- Update stackline when switching spaces
+			-- NOTE: hs.spaces.watcher uses deprecated macos APIs, so this may break in an upcoming macos release
+			log.i(("hs.spaces.watcher -> changed to space %d"):format(spaceIdx))
+			stackline.forceRedraw = true -- force the next update cycle to redraw
+			stackline.queryWindowState:start()
+			stackline:refreshClickTracker()
+		end
+	)
+	:start() -- }}}
 
 return stackline
